@@ -1,43 +1,15 @@
-#include "Trie.hpp"
 #include <iostream>
+#include "chat.hpp"
 
 int main(void)
 {
-    std::string file_path = "vocabulary/words_alpha.txt";
-    TrieNode* trie = createTreeFromFile(file_path);
+    Chat chat;
 
-    std::vector<std::string> lines;
+    chat.reg((char*)"user1", (char*)"Qwerty", 6);
+    chat.reg((char*)"user2", (char*)"12345", 5);
 
-    while(true)
-    {
-        std::cout << std::endl;
-        std::cout << "Enter line" << std::endl;
-        std::string str; 
-        std::cin >> str; 
-
-        std::cout << "Prefix: " << str << std::endl;
-
-        if (str.front() == '1')
-        {
-            std::cout << "Exit" << std::endl;
-            break;
-        }
-        else
-        {
-            lines = autocomplete(trie, str);
-            if (lines.empty())
-            {
-                std::cout << "No words for autocomplete!" << std::endl;
-            }
-            else
-            {
-                for ( auto& l : lines)
-                {
-                    std::cout << l << std::endl;
-                }
-            }
-        }
-
-    }
-    return 0;
+    std::cout << chat.login((char*)"user1", (char*)"Qwerty", 6) << std::endl;
+    std::cout << chat.login((char*)"user1", (char*)"12345", 5) << std::endl;
+    std::cout << chat.login((char*)"user2", (char*)"Qwerty", 6) << std::endl;
+    std::cout << chat.login((char*)"user2", (char*)"12345", 5) << std::endl;
 }
